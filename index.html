@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FL Mini - Web Studio</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-zinc-950 text-white font-mono">
+  <div class="min-h-screen p-4">
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-6 border-b border-orange-500 pb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-orange-500 rounded flex items-center justify-center text-2xl">♪</div>
+        <h1 class="text-3xl font-bold tracking-tight">FL MINI</h1>
+      </div>
+      <div class="flex gap-4 items-center">
+        <div class="flex items-center gap-2">
+          <label>BPM:</label>
+          <input id="bpm" type="number" value="128" class="bg-zinc-900 w-20 px-3 py-1 rounded text-center">
+        </div>
+        <button id="playBtn" class="px-8 py-3 bg-orange-500 hover:bg-orange-600 rounded font-bold text-lg">PLAY</button>
+        <button id="stopBtn" class="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 rounded font-bold">STOP</button>
+      </div>
+    </header>
+
+    <!-- Step Sequencer (Channel Rack style) -->
+    <div class="mb-8">
+      <h2 class="text-xl mb-3 text-orange-400">CHANNEL RACK - DRUMS</h2>
+      <div id="sequencer" class="grid grid-cols-17 gap-1"></div>
+    </div>
+
+    <!-- Piano Roll -->
+    <div>
+      <h2 class="text-xl mb-3 text-orange-400">PIANO ROLL - MELODY</h2>
+      <div id="pianoRoll" class="grid gap-px bg-zinc-900 p-4 rounded overflow-auto"></div>
+    </div>
+
+    <!-- Mixer -->
+    <div class="mt-8">
+      <h2 class="text-xl mb-3 text-orange-400">MIXER</h2>
+      <div id="mixer" class="flex gap-8"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
