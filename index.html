@@ -3,46 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FL Mini - Web Studio</title>
+  <title>Piano Studio - Infinite Music</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-zinc-950 text-white font-mono">
-  <div class="min-h-screen p-4">
-    <!-- Header -->
-    <header class="flex items-center justify-between mb-6 border-b border-orange-500 pb-4">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-orange-500 rounded flex items-center justify-center text-2xl">♪</div>
-        <h1 class="text-3xl font-bold tracking-tight">FL MINI</h1>
+<body class="bg-zinc-950 text-white">
+  <div class="min-h-screen p-6">
+    <header class="flex justify-between items-center mb-8 border-b border-orange-500 pb-4">
+      <div class="flex items-center gap-4">
+        <div class="text-4xl">🎹</div>
+        <h1 class="text-4xl font-bold tracking-tighter">PIANO STUDIO</h1>
       </div>
-      <div class="flex gap-4 items-center">
-        <div class="flex items-center gap-2">
-          <label>BPM:</label>
-          <input id="bpm" type="number" value="128" class="bg-zinc-900 w-20 px-3 py-1 rounded text-center">
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-3">
+          <span>BPM</span>
+          <input id="bpm" type="number" value="120" class="bg-zinc-900 w-20 px-4 py-2 rounded text-center text-xl">
         </div>
-        <button id="playBtn" class="px-8 py-3 bg-orange-500 hover:bg-orange-600 rounded font-bold text-lg">PLAY</button>
-        <button id="stopBtn" class="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 rounded font-bold">STOP</button>
+        <button id="playBtn" class="px-10 py-4 bg-orange-500 hover:bg-orange-600 rounded-xl font-bold text-xl">PLAY</button>
+        <button id="stopBtn" class="px-8 py-4 bg-zinc-800 hover:bg-zinc-700 rounded-xl font-bold text-xl">STOP</button>
+        <button id="recordBtn" class="px-8 py-4 bg-red-600 hover:bg-red-700 rounded-xl font-bold text-xl">RECORD</button>
+        <button id="downloadBtn" class="px-8 py-4 bg-green-600 hover:bg-green-700 rounded-xl font-bold text-xl">DOWNLOAD MP3</button>
       </div>
     </header>
 
-    <!-- Step Sequencer (Channel Rack style) -->
-    <div class="mb-8">
-      <h2 class="text-xl mb-3 text-orange-400">CHANNEL RACK - DRUMS</h2>
-      <div id="sequencer" class="grid grid-cols-17 gap-1"></div>
-    </div>
+    <!-- Virtual Piano Keyboard -->
+    <div id="keyboard" class="flex justify-center gap-1 mb-12"></div>
 
     <!-- Piano Roll -->
-    <div>
-      <h2 class="text-xl mb-3 text-orange-400">PIANO ROLL - MELODY</h2>
-      <div id="pianoRoll" class="grid gap-px bg-zinc-900 p-4 rounded overflow-auto"></div>
+    <div class="mb-8">
+      <h2 class="text-2xl mb-4 text-orange-400">PIANO ROLL - Compose Unlimited</h2>
+      <div id="pianoRollContainer" class="overflow-x-auto bg-zinc-900 p-4 rounded-xl border border-zinc-700">
+        <div id="pianoRoll" class="grid gap-px"></div>
+      </div>
     </div>
 
-    <!-- Mixer -->
-    <div class="mt-8">
-      <h2 class="text-xl mb-3 text-orange-400">MIXER</h2>
-      <div id="mixer" class="flex gap-8"></div>
-    </div>
+    <p class="text-center text-zinc-500 text-sm">Tip: Click keys or use your keyboard (A S D F G H J for white keys, W E T Y U for black keys). Scroll piano roll right to make longer songs.</p>
   </div>
 
   <script src="script.js"></script>
