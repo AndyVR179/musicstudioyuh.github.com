@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeatForge — DAW</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- TITLEBAR -->
+<div id="titlebar">
+  <div class="logo">BEAT<span>FORGE</span> DAW</div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div id="song-name" style="font-size:11px;color:var(--text-secondary);cursor:pointer" title="Double-click to rename">Untitled Song</div>
+    <div id="vu-meters">
+      <div class="vu-bar"><div class="vu-fill"></div></div>
+      <div class="vu-bar"><div class="vu-fill"></div></div>
+      <div class="vu-bar"><div class="vu-fill"></div></div>
+      <div class="vu-bar"><div class="vu-fill"></div></div>
+      <div class="vu-bar"><div class="vu-fill"></div></div>
+      <div class="vu-bar"><div class="vu-fill"></div></div>
+      <div class="vu-bar"><div class="vu-fill"></div></div>
+      <div class="vu-bar"><div class="vu-fill"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+  <!-- Transport -->
+  <div id="transport">
+    <button class="transport-btn play" title="Play/Pause [Space]">▶</button>
+    <button class="transport-btn stop" title="Stop">■</button>
+    <button class="transport-btn record" title="Record">●</button>
+  </div>
+
+  <!-- BPM -->
+  <div id="bpm-display">
+    <div class="bpm-control">
+      <button class="bpm-arrow" id="bpm-up">▲</button>
+      <div class="display-block" id="bpm-value">128</div>
+      <button class="bpm-arrow" id="bpm-down">▼</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div class="display-label">BPM</div>
+      <div class="display-label" style="color:var(--text-dim);font-size:8px">dbl-click to type</div>
+    </div>
+  </div>
+
+  <!-- Step controls -->
+  <div class="toolbar-group">
+    <div style="font-size:9px;color:var(--text-dim);margin-right:4px;letter-spacing:1px">STEPS</div>
+    <button class="step-count-btn active" data-count="16">16</button>
+    <button class="step-count-btn" data-count="32">32</button>
+    <button class="step-count-btn" data-count="64">64</button>
+  </div>
+
+  <!-- File ops -->
+  <div class="toolbar-group">
+    <button class="tb-btn" id="save-btn">💾 Save</button>
+    <button class="tb-btn" id="load-btn">📂 Load</button>
+    <input type="file" id="load-input" accept=".json" style="display:none">
+  </div>
+
+  <!-- Import / Export -->
+  <div class="toolbar-group">
+    <button class="tb-btn" id="import-btn">🎵 Import MP3</button>
+    <button class="tb-btn success" id="export-btn">⬇ Export WAV</button>
+  </div>
+
+  <!-- Timeline -->
+  <div class="toolbar-group">
+    <button class="tb-btn" id="add-bar-btn">+ 4 Bars</button>
+    <div style="font-size:9px;color:var(--text-dim);padding:0 4px">[SPACE] play</div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div id="main-layout">
+
+  <!-- LEFT PANEL: Channels -->
+  <div id="left-panel">
+    <div class="panel-header">Channels</div>
+    <div id="channel-list"></div>
+    <button id="add-channel-btn">+ Add Channel</button>
+  </div>
+
+  <!-- CENTER: Step Sequencer -->
+  <div id="center-panel">
+    <div id="pattern-tabs"></div>
+    <div id="step-sequencer">
+      <div id="seq-grid"></div>
+    </div>
+    <div class="seq-controls">
+      <span>Steps per bar:</span>
+      <button class="step-count-btn active" data-count="16">16</button>
+      <button class="step-count-btn" data-count="32">32</button>
+      <button class="step-count-btn" data-count="64">64</button>
+      <span style="margin-left:auto;color:var(--text-dim);font-size:9px">Click+Drag to paint • Shift+Del to remove channel</span>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL: Piano Roll -->
+  <div id="right-panel">
+    <div class="panel-header">
+      <span>Piano Roll</span>
+      <span style="font-size:9px;color:var(--text-dim)">Click to assign freq</span>
+    </div>
+    <div id="piano-keys"></div>
+  </div>
+
+</div>
+
+<!-- BOTTOM: Song Timeline -->
+<div id="bottom-panel">
+  <div class="panel-header">
+    <span>Song Timeline</span>
+    <span style="font-size:9px;color:var(--text-dim)">Click cells to place pattern in bar</span>
+  </div>
+  <div id="song-timeline">
+    <div id="timeline-tracks">
+      <div id="timeline-ruler"></div>
+      <div id="timeline-rows" style="position:relative">
+        <div id="playhead"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATIONS -->
+<div id="notifications"></div>
+
+<!-- ============= MODALS ============= -->
+
+<!-- Add Channel Modal -->
+<div class="modal-overlay hidden" id="add-channel-modal">
+  <div class="modal">
+    <h2>Add Channel</h2>
+    <div class="modal-row">
+      <label>Select Instrument</label>
+      <div class="instrument-grid" id="instrument-picker-grid"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-cancel" id="cancel-add-channel">Cancel</button>
+      <button class="btn-modal btn-confirm" id="confirm-add-channel">Add Channel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Import Modal -->
+<div class="modal-overlay hidden" id="import-modal">
+  <div class="modal">
+    <h2>Import Audio</h2>
+    <div class="modal-row">
+      <label>Select MP3 or WAV file</label>
+      <div class="import-drop-zone" id="import-drop">
+        📁 Click to browse audio file
+        <input type="file" id="import-file-input" accept="audio/*,.mp3,.wav">
+      </div>
+    </div>
+    <div style="font-size:10px;color:var(--text-dim);margin-top:8px">
+      The imported sound will be added as a new channel you can sequence in the grid.
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-cancel" id="cancel-import">Cancel</button>
+      <button class="btn-modal btn-confirm" id="confirm-import">Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- Export Modal -->
+<div class="modal-overlay hidden" id="export-modal">
+  <div class="modal">
+    <h2>Export Song</h2>
+    <div class="modal-row">
+      <label>Song Name</label>
+      <input type="text" id="export-name-input" placeholder="My Song">
+    </div>
+    <div style="font-size:10px;color:var(--text-dim);margin-top:4px">
+      Exports as a high-quality WAV file. Your entire song timeline will be rendered.
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-cancel" id="cancel-export">Cancel</button>
+      <button class="btn-modal btn-export" id="confirm-export">Export WAV</button>
+    </div>
+  </div>
+</div>
+
+<!-- Export Progress Modal -->
+<div class="modal-overlay hidden" id="progress-modal">
+  <div class="modal" style="text-align:center">
+    <h2>Exporting...</h2>
+    <div class="progress-text" style="font-size:11px;color:var(--text-secondary);margin-bottom:8px">Rendering audio...</div>
+    <div class="progress-bar-outer"><div class="progress-bar-inner"></div></div>
+  </div>
+</div>
+
+<script src="js/audio.js"></script>
+<script src="js/export.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
