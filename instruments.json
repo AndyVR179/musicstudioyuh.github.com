@@ -1,0 +1,25 @@
+{
+  "instruments": [
+    { "id": "kick", "name": "Kick", "color": "#e74c3c", "category": "drums", "freq": 60, "type": "kick" },
+    { "id": "snare", "name": "Snare", "color": "#e67e22", "category": "drums", "freq": 200, "type": "snare" },
+    { "id": "hihat_c", "name": "Hi-Hat C", "color": "#f1c40f", "category": "drums", "freq": 8000, "type": "hihat_closed" },
+    { "id": "hihat_o", "name": "Hi-Hat O", "color": "#2ecc71", "category": "drums", "freq": 6000, "type": "hihat_open" },
+    { "id": "clap", "name": "Clap", "color": "#1abc9c", "category": "drums", "freq": 1000, "type": "clap" },
+    { "id": "tom", "name": "Tom", "color": "#3498db", "category": "drums", "freq": 120, "type": "tom" },
+    { "id": "cymbal", "name": "Cymbal", "color": "#9b59b6", "category": "drums", "freq": 5000, "type": "cymbal" },
+    { "id": "bass", "name": "Bass Synth", "color": "#e74c3c", "category": "synth", "freq": 80, "type": "bass" },
+    { "id": "lead", "name": "Lead Synth", "color": "#3498db", "category": "synth", "freq": 440, "type": "lead" },
+    { "id": "pad", "name": "Pad", "color": "#9b59b6", "category": "synth", "freq": 220, "type": "pad" },
+    { "id": "piano", "name": "Piano", "color": "#1abc9c", "category": "keys", "freq": 261, "type": "piano" },
+    { "id": "pluck", "name": "Pluck", "color": "#e67e22", "category": "synth", "freq": 440, "type": "pluck" }
+  ],
+  "notes": ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
+  "noteFreqs": {
+    "C3": 130.81, "C#3": 138.59, "D3": 146.83, "D#3": 155.56, "E3": 164.81, "F3": 174.61,
+    "F#3": 185.00, "G3": 196.00, "G#3": 207.65, "A3": 220.00, "A#3": 233.08, "B3": 246.94,
+    "C4": 261.63, "C#4": 277.18, "D4": 293.66, "D#4": 311.13, "E4": 329.63, "F4": 349.23,
+    "F#4": 369.99, "G4": 392.00, "G#4": 415.30, "A4": 440.00, "A#4": 466.16, "B4": 493.88,
+    "C5": 523.25, "C#5": 554.37, "D5": 587.33, "D#5": 622.25, "E5": 659.26, "F5": 698.46,
+    "F#5": 739.99, "G5": 783.99, "G#5": 830.61, "A5": 880.00, "A#5": 932.33, "B5": 987.77
+  }
+}
